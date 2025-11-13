@@ -139,14 +139,14 @@ body {
 }
 
 .nav-avatar {
-  width: 32px;
-  height: 32px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
   margin-left: 10px;
   display: none; /* 默认隐藏 */
   object-fit: cover;
   vertical-align: middle;
-  border: 2px solid #fff; /* 可选：给头像加个小白边 */
+  border: 2px solid #ffeeab; /* 可选：给头像加个小白边 */
   box-shadow: 0 0 4px rgba(0,0,0,0.2); /* 可选阴影 */
 }
 
