@@ -1,6 +1,7 @@
-/* Fonts */
+/* Body */
 body {
   background-color: #FFFFE5;
+  font-family: "Playpen Sans", sans-serif;
 }
 
 /* General Reset */
@@ -118,6 +119,8 @@ body {
   text-decoration: none;
   transition: all 0.3s;
   font-family: "Vanilla Caramel", sans-serif;
+  cursor: pointer;
+  background: transparent;
 }
 
 .login-btn:hover {
@@ -133,6 +136,18 @@ body {
 .quiz-btn.active:hover,
 .login-btn.active:hover {
   filter: brightness(1.05);
+}
+
+.nav-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  margin-left: 10px;
+  display: none; /* 默认隐藏 */
+  object-fit: cover;
+  vertical-align: middle;
+  border: 2px solid #fff; /* 可选：给头像加个小白边 */
+  box-shadow: 0 0 4px rgba(0,0,0,0.2); /* 可选阴影 */
 }
 
 /* Hamburger Icon */
@@ -248,6 +263,172 @@ body {
     font-size: 16px;
     padding: 10px 18px;
   }
+}
+
+/* Overlay & Login Card */
+.overlay {
+  position: fixed;
+  top:0; left:0;
+  width:100%; height:100%;
+  background: rgba(0,0,0,0.4);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+}
+.overlay.active { 
+  display: flex; 
+}
+
+.login-card {
+  position: relative;
+  width: 380px;
+  background: #fffdf3;
+  border-radius: 25px;
+  padding: 40px 30px 30px;
+  text-align: center;
+  box-shadow: 0 6px 30px rgba(0,0,0,0.25);
+  animation: fadeInUp 0.35s ease-out;
+}
+
+@keyframes fadeInUp {
+  from { transform: translateY(60px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.login-card .icon {
+  width: 95px; 
+  height: 95px; 
+  background: #ffedca; 
+  border-radius: 50%;
+  border: 3px solid #fff3d6; 
+  margin: -90px auto 15px;
+  display: flex; 
+  justify-content: center; 
+  align-items: center;
+}
+
+.login-card .icon img {
+  width: 50%;
+  height:60%;
+  margin: 15px auto 15px;
+}
+
+.login-card h2 { 
+  font-family: "Vanilla Caramel", cursive; 
+  color: #2A3792; 
+  margin-bottom: 20px; 
+  font-size: 28px; 
+}
+
+.field { 
+  position: relative; 
+  margin-bottom: 18px; 
+  margin-top: 25px; 
+}
+
+.field input {
+  width: 100%; 
+  padding: 12px 40px 12px 15px;
+  border: 1px solid #e4c78f; 
+  border-radius: 12px;
+  background: #fffef9; 
+  color: #0025B7;
+  font-weight: 500; 
+  font-size: 15px; 
+  outline: none;
+  font-family: "Playpen Sans", sans-serif;
+}
+
+.field input::placeholder { 
+  color:#b7b7b7; 
+  font-weight: 500; 
+}
+
+.field input:focus { 
+  border-color: #ffb457; 
+  box-shadow: 0 0 6px rgba(255,180,87,0.5); 
+  font-weight: 600; 
+}
+
+.field .icon-imgs, .field .icon-img {
+  position: absolute; 
+  top:50%; right:16px; 
+  transform: translateY(-50%);
+  opacity: 0.8; 
+  width: 18px; 
+  height: 21px;
+}
+
+.divider { 
+  display: flex; 
+  align-items:center; 
+  justify-content:center; 
+  color:#b78b56; 
+  font-weight:600; 
+  margin:30px 0; 
+  font-size:13px; 
+}
+
+.divider span { 
+  height:1px; 
+  background:#e4c78f; 
+  width:30%; 
+  margin:0 8px; 
+  display:inline-block; 
+}
+
+.btn-container { 
+  position: relative; 
+  height:50px; 
+}
+
+#login-btn {
+  position:absolute; 
+  left:50%; 
+  transform: translateX(-50%);
+  padding:10px 30px; 
+  margin-top:13px;
+  border:none; 
+  border-radius:25px;
+  background:#2A3792; 
+  color:#FFFAE7;
+  font-weight:bold; 
+  font-size:16px; 
+  cursor:pointer;
+  font-family: "Playpen Sans", sans-serif;
+}
+
+#login-btn:hover { 
+  background:#1d297d; 
+}
+
+/* Google Button */
+.google-btn {
+  display:flex; 
+  align-items:center; 
+  justify-content:center;
+  gap:8px; 
+  background:#FFE5A3; 
+  color:#0025B7; 
+  font-weight:600;
+  border-radius:12px; 
+  padding:10px 15px; 
+  border:none; 
+  cursor:pointer;
+  width:100%; 
+  font-size:15px; 
+  margin-bottom:20px;
+  font-family: "Playpen Sans", sans-serif;
+}
+
+.google-btn:hover { 
+  background:rgb(255,191,127); 
+}
+
+.google-btn img { 
+  width:20px; 
+  height:20px; 
 }
 
 /* Footer */
