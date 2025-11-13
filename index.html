@@ -39,12 +39,47 @@
     <div class="nav-buttons">
       <a href="#" class="quiz-btn">Take the Quiz</a>
       <a href="#" class="login-btn">Log In</a>
+      <img id="nav-avatar" class="nav-avatar" src="" alt="User Avatar">
     </div>
   </div>
 </nav>
 
 <!-- Content (for scroll test) -->
 <main style="height: 1500px; background-color: #FFFFE5;"></main>
+
+<!-- Login Overlay -->
+<div class="overlay" id="overlay">
+  <div class="login-card">
+    <div class="icon">
+      <img src="images/login/user.png" alt="User Icon">
+    </div>
+    <h2>Log In</h2>
+    <div class="msg" id="msg"></div>
+
+    <form id="loginForm" onsubmit="return false;">
+      <div class="field">
+        <input type="text" id="uname" placeholder="Email">
+        <img src="images/login/user.png" class="icon-imgs">
+      </div>
+      <div class="field">
+        <input type="password" id="pass" placeholder="Password">
+        <img src="images/login/pw.png" class="icon-img">
+      </div>
+
+      <div class="divider">
+        <span></span> OR <span></span>
+      </div>
+
+      <button class="google-btn" id="googleLogin">
+        <img src="images/login/google.png" alt="Google Logo"> Sign in with Google
+      </button>
+
+      <div class="btn-container">
+        <input type="submit" id="login-btn" value="Log In">
+      </div>
+    </form>
+  </div>
+</div>
 
 <!-- Footer -->
 <footer class="footer">
@@ -89,6 +124,31 @@
   </div>
   <div class="footer-bottom">© 2025 Starkit. All Rights Reserved.</div>
 </footer>
+
+<!-- Google Sign-In -->
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+
+<script>
+  // 初始化 Google 登录
+  window.onload = function() {
+    google.accounts.id.initialize({
+      client_id: "53254119460-3hj1559jtb4c2kthhqjijokjevjk8ua4.apps.googleusercontent.com",
+      callback: handleCredentialResponse
+    });
+  };
+</script>
+
+<div id="g_id_onload"
+     data-client_id="53254119460-3hj1559jtb4c2kthhqjijokjevjk8ua4.apps.googleusercontent.com"
+     data-callback="handleCredentialResponse">
+</div>
+
+<!-- 隐藏的 Google 登录信息容器 -->
+<div id="user-info" style="display:none;">
+  <img id="avatar" src="" alt="Avatar">
+  <p id="name"></p>
+  <p id="email"></p>
+</div>
 
 <!-- JavaScript -->
 <script src="script.js"></script>
