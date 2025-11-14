@@ -176,17 +176,8 @@ function handleCredentialResponse(response) {
   navAvatar.src = payload.picture;
   navAvatar.style.display = 'inline-block';
 
-  // Display user information (if a user-info block exists)
-  const avatar = document.getElementById('avatar');
-  const name = document.getElementById('name');
-  const email = document.getElementById('email');
-  if (avatar && name && email) {
-    avatar.src = payload.picture;
-    name.innerText = payload.name;
-    email.innerText = payload.email;
-    document.getElementById('user-info').style.display = 'block';
-  }
 
   overlay.classList.remove('active');
 }
 })
+
