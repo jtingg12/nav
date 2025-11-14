@@ -183,17 +183,6 @@ googleLoginBtn.addEventListener('click', (e) => {
   google.accounts.id.prompt(); // Trigger Google login window
 })
 
-// ---------------- Restore User from localStorage ----------------
-window.addEventListener('load', () => {
-  const savedUser = JSON.parse(localStorage.getItem('starkit_user'));
-  if(savedUser) {
-    const navAvatar = document.getElementById('nav-avatar');
-    navAvatar.src = savedUser.picture;
-    navAvatar.style.display = 'inline-block';
-    loginBtn.style.display = 'none';
-  }
-});
-
 // 阻止内部链接刷新
 document.querySelectorAll('a').forEach(link => {
   link.addEventListener('click', (e) => {
