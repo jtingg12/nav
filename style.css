@@ -276,6 +276,7 @@ body {
   align-items: center;
   z-index: 10000;
 }
+
 .overlay.active { 
   display: flex; 
 }
@@ -627,4 +628,23 @@ body {
 
 #backToTop:hover {
   background-color: #ff7a0e;
+}
+
+/* ===========================
+   Mobile Override Font Fix
+   automatically replaced Vanilla Caramel with Winky Sans
+   =========================== */
+@media screen and (max-width: 850px) {
+
+  /* Any elements that originally used Vanilla Caramel were changed to Winky Sans on the phone */
+  [style*="Vanilla Caramel"],
+  .nav-links li a,
+  .quiz-btn,
+  .login-btn,
+  .login-card h2,
+  .footer,
+  .footer-center h3,
+  .footer-right h3 {
+    font-family: "Winky Sans", sans-serif !important;
+  }
 }
