@@ -10,7 +10,8 @@ window.addEventListener('scroll', () => {
   if (window.scrollY > 50) {
     navbar.classList.add('scrolled');
     backToTop.style.display = 'block';
-  } else {
+  } 
+  else {
     navbar.classList.remove('scrolled');
     backToTop.style.display = 'none';
   }
@@ -31,7 +32,7 @@ const navItems = document.querySelectorAll('.nav-links li a');
 const quizBtn = document.querySelector('.quiz-btn');
 const loginBtn = document.querySelector('.login-btn');
 
-// 当点击普通导航项时
+// When clicking on a regular navigation item
 navItems.forEach(link => {
   link.addEventListener('click', () => {
     navItems.forEach(l => l.classList.remove('active'));
@@ -41,21 +42,21 @@ navItems.forEach(link => {
   });
 });
 
-// 点击 Quiz 按钮时
+// Click the Quiz button
 quizBtn.addEventListener('click', () => {
   navItems.forEach(l => l.classList.remove('active'));
   quizBtn.classList.add('active');
   loginBtn.classList.remove('active');
 });
 
-// 点击 Login 按钮时
+// Click the Login button
 loginBtn.addEventListener('click', () => {
   navItems.forEach(l => l.classList.remove('active'));
   loginBtn.classList.add('active');
   quizBtn.classList.remove('active');
 });
 
-// 自动检测当前页面高亮
+// Automatically detect
 const currentPage = window.location.pathname.split("/").pop();
 navItems.forEach(link => {
   if (link.getAttribute("href") === currentPage) {
@@ -110,7 +111,7 @@ function showMsg() {
   }
 }
 
-// ✅ 这就是关键逻辑：当点击 “Log In” 时执行的动作
+// Actions performed when “Log In” is clicked
 btn.addEventListener('click', (e) => {
   e.preventDefault();
 
@@ -118,28 +119,31 @@ btn.addEventListener('click', (e) => {
   const password = pass.value.trim();
 
   if (email && password) {
-    // 模拟登录成功
+    // Simulated login successful
     msg.innerText = 'Login successful!';
     msg.style.color = '#008404ff';
 
-    // 模拟存储用户
+    // Simulated storage users
     const fakeUser = {
       name: email.split('@')[0],
       email: email,
       picture: 'images/login/fakeuser.png'
     };
+
     localStorage.setItem('starkit_user', JSON.stringify(fakeUser));
 
-    // 更新导航栏头像
+    // Update navigation bar avatar
     const navAvatar = document.getElementById('nav-avatar');
     navAvatar.src = fakeUser.picture;
     navAvatar.style.display = 'inline-block';
 
-    // 关闭登录弹窗
+    // Close login pop-up
     setTimeout(() => {
       overlay.classList.remove('active');
     }, 800);
-  } else {
+  } 
+  
+  else {
     msg.innerText = 'Please fill in all fields!';
     msg.style.color = 'rgb(218,49,49)';
   }
@@ -149,8 +153,7 @@ btn.addEventListener('click', (e) => {
 const googleLoginBtn = document.getElementById('googleLogin');
 googleLoginBtn.addEventListener('click', (e) => {
   e.preventDefault();
-  google.accounts.id.prompt(); // ✅ 触发 Google 登录窗口
-});
+  google.accounts.id.prompt(); // Trigger Google login window
 
 function decodeJwtResponse(token) {
   const base64Url = token.split('.')[1];
@@ -163,17 +166,17 @@ function decodeJwtResponse(token) {
 
 function handleCredentialResponse(response) {
   const payload = decodeJwtResponse(response.credential);
-  console.log('✅ Google 登录成功:', payload);
+  console.log('Google login successful:', payload);
 
-  // 存储用户资料
+  // Store user data
   localStorage.setItem('starkit_user', JSON.stringify(payload));
 
-  // 更新导航栏头像
+  // Update navigation bar avatar
   const navAvatar = document.getElementById('nav-avatar');
   navAvatar.src = payload.picture;
   navAvatar.style.display = 'inline-block';
 
-  // 显示用户信息（如果有 user-info 区块）
+  // Display user information (if a user-info block exists)
   const avatar = document.getElementById('avatar');
   const name = document.getElementById('name');
   const email = document.getElementById('email');
@@ -186,13 +189,4 @@ function handleCredentialResponse(response) {
 
   overlay.classList.remove('active');
 }
-
-// // 页面加载时检测登录状态
-// window.addEventListener('DOMContentLoaded', () => {
-//   const user = JSON.parse(localStorage.getItem('starkit_user'));
-//   if (user) {
-//     const navAvatar = document.getElementById('nav-avatar');
-//     navAvatar.src = user.picture;
-//     navAvatar.style.display = 'inline-block';
-//   }
-// });
+})
