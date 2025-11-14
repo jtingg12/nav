@@ -182,3 +182,59 @@ googleLoginBtn.addEventListener('click', (e) => {
   e.preventDefault();
   google.accounts.id.prompt(); // Trigger Google login window
 })
+
+// ---------------- Restore User from localStorage ----------------
+window.addEventListener('load', () => {
+  const savedUser = JSON.parse(localStorage.getItem('starkit_user'));
+  if(savedUser) {
+    const navAvatar = document.getElementById('nav-avatar');
+    navAvatar.src = savedUser.picture;
+    navAvatar.style.display = 'inline-block';
+    loginBtn.style.display = 'none';
+  }
+});
+
+// 阻止内部链接刷新
+document.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', (e) => {
+    const href = link.getAttribute('href');
+
+    // 内部页面链接（不是完整 URL，也不是 #）
+    if(href && !href.startsWith('http') && href !== '#') {
+      e.preventDefault();           // 阻止刷新
+      loadPage(href);               // 动态加载内容
+      history.pushState({ page: href }, '', href); // 更新 URL
+      setActiveLink(link);          // 更新导航高亮
+    }
+  });
+});
+
+// 浏览器前进/后退支持
+window.addEventListener('popstate', (e) => {
+  if(e.state && e.state.page) {
+    loadPage(e.state.page);
+  }
+});
+
+// 加载页面内容到 main
+function loadPage(page) {
+  fetch(page)
+    .then(res => res.text())
+    .then(html => {
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(html, 'text/html');
+      const mainContent = doc.querySelector('main');
+      if(mainContent) {
+        document.querySelector('main').innerHTML = mainContent.innerHTML;
+      }
+    });
+}
+
+// 更新导航高亮
+function setActiveLink(link) {
+  const navItems = document.querySelectorAll('.nav-links li a');
+  navItems.forEach(l => l.classList.remove('active'));
+  quizBtn.classList.remove('active');
+  loginBtn.classList.remove('active');
+  link.classList.add('active');
+}
