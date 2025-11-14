@@ -149,12 +149,7 @@ btn.addEventListener('click', (e) => {
   }
 });
 
-// ---------------- Google Sign-In ----------------
-const googleLoginBtn = document.getElementById('googleLogin');
-googleLoginBtn.addEventListener('click', (e) => {
-  e.preventDefault();
-  google.accounts.id.prompt(); // Trigger Google login window
-
+// =============== GOOGLE DECODE TOKEN ===============
 function decodeJwtResponse(token) {
   const base64Url = token.split('.')[1];
   const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
@@ -164,20 +159,26 @@ function decodeJwtResponse(token) {
   return JSON.parse(jsonPayload);
 }
 
-function handleCredentialResponse(response) {
+// =============== GOOGLE CALLBACK (MAIN) ===============
+window.handleCredentialResponse = function(response) {
   const payload = decodeJwtResponse(response.credential);
-  console.log('Google login successful:', payload);
+  console.log("Google Login Success:", payload);
 
-  // Store user data
+  // Save user
   localStorage.setItem('starkit_user', JSON.stringify(payload));
 
-  // Update navigation bar avatar
-  const navAvatar = document.getElementById('nav-avatar');
+  // Show avatar
+  const navAvatar = document.getElementById("nav-avatar");
   navAvatar.src = payload.picture;
-  navAvatar.style.display = 'inline-block';
+  navAvatar.style.display = "inline-block";
 
+  // Close login popup
+  overlay.classList.remove("active");
+};
 
-  overlay.classList.remove('active');
-}
+// ---------------- Google Sign-In ----------------
+const googleLoginBtn = document.getElementById('googleLogin');
+googleLoginBtn.addEventListener('click', (e) => {
+  e.preventDefault();
+  google.accounts.id.prompt(); // Trigger Google login window
 })
-
