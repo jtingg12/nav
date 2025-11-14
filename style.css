@@ -648,3 +648,7 @@ body {
     font-family: "Winky Sans", sans-serif !important;
   }
 }
+
+#user-info {
+  display: none !important;
+}
