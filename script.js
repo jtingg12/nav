@@ -1,40 +1,3 @@
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
-  apiKey: "AIzaSyCTN34CUS50NMeH3OKsAsr3SPJt2DmPEUU",
-  authDomain: "starkit-baf89.firebaseapp.com",
-  projectId: "starkit-baf89",
-  storageBucket: "starkit-baf89.firebasestorage.app",
-  messagingSenderId: "808240508570",
-  appId: "1:808240508570:web:433eb00d44e4664f9e7923",
-  measurementId: "G-7ELEK0VFTK"
-};
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
-
-import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
-
-// 初始化 Firestore
-const db = getFirestore(app);
-
-async function saveUserToFirestore(user) {
-  try {
-    // Document ID 用 email，保证唯一
-    await setDoc(doc(db, "users", user.email), user);
-    console.log("User saved to Firestore:", user);
-  } catch (err) {
-    console.error("Error saving user:", err);
-  }
-}
-
 // ---------------- Navbar Elements ----------------
 const navbar = document.getElementById('navbar');
 const menuToggle = document.getElementById('menu-toggle');
@@ -169,8 +132,6 @@ btn.addEventListener('click', (e) => {
 
     localStorage.setItem('starkit_user', JSON.stringify(fakeUser));
 
-    saveUserToFirestore(fakeUser);
-
     // Update navigation bar avatar
     const navAvatar = document.getElementById('nav-avatar');
     navAvatar.src = fakeUser.picture;
@@ -205,13 +166,6 @@ window.handleCredentialResponse = function(response) {
 
   // Save user
   localStorage.setItem('starkit_user', JSON.stringify(payload));
-
-  // 保存到 Firestore
-saveUserToFirestore({
-  name: payload.name,
-  email: payload.email,
-  picture: payload.picture
-});
 
   // Show avatar
   const navAvatar = document.getElementById("nav-avatar");
